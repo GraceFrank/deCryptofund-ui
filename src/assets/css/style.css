@@ -810,6 +810,10 @@ section {
   overflow: hidden;
   transition: 0.3s;
 }
+.pricing .section-header {
+  text-align: left;
+  padding-top: 40px;
+}
 .pricing .box:hover {
   transform: scale(1.1);
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
@@ -901,6 +905,52 @@ section {
 }
 .pricing .btn-get-started:hover i {
   transform: translateX(5px);
+}
+
+
+.pricing .feature-icons {
+  margin-top: 120px;
+}
+.pricing .feature-icons h3 {
+  color: #012970;
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 20px;
+  /* text-align: center; */
+}
+@media (max-width: 768px) {
+  .pricing .feature-icons h3 {
+    font-size: 28px;
+  }
+}
+.pricing .feature-icons .content .icon-box {
+  display: flex;
+}
+.pricing .feature-icons .content .icon-box h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #012970;
+}
+.pricing .feature-icons .content .icon-box i {
+  font-size: 20px;
+  line-height: 44px;
+  color: #b50edf;
+  margin-right: 15px;
+}
+.pricing .feature-icons .content .icon-box p {
+  font-size: 15px;
+  color: #848484;
+}
+
+.pricing .service-box {
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+  /* height: 100%; */
+  padding: 30px 15px;
+  /* text-align: center; */
+  transition: 0.3s;
+  border-radius: 5px;
+  border-bottom: 3px solid #4154f1;
 }
 
 /*--------------------------------------------------------------
