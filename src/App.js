@@ -4,7 +4,7 @@ import abi from "./utils/DeCryptoFund.json";
 import "./App.css";
 
 export default function App() {
-  const contractAddress = "0x49520726938Cc908706BE071CCE11cD199f1136D";
+  const contractAddress = "0xC48AD3d45675Fbb8d343AE29A208bE3D7692C948";
   const contractABI = abi.abi;
   const [currentAccount, setCurrentAccount] = useState("");
   const [totalFunding, setTotalFunding] = useState(0);
@@ -27,25 +27,38 @@ export default function App() {
         /*
          * Call the getallFundings method from your Smart Contract
          */
-        const waves = await wavePortalContract.getAllFundings();
+        const fundings = await wavePortalContract.getAllFundings();
 
         /*
          * We only need address, timestamp, and message in our UI so let's
          * pick those out
          */
-        let wavesCleaned = [];
-        waves.forEach((wave) => {
-          wavesCleaned.push({
-            address: wave.waver,
-            timestamp: new Date(wave.timestamp * 1000),
-            message: wave.message,
+        let fundingsCleaned = [];
+        fundings.forEach((funding) => {
+          fundingsCleaned.push({
+            address: funding.funder,
+            timestamp: new Date(funding.timestamp * 1000),
+            message: funding.message,
           });
         });
 
         /*
          * Store our data in React State
          */
-        setAllFundings(wavesCleaned);
+        setAllFundings(fundingsCleaned);
+
+        wavePortalContract.on("NewFunding", (from, timestamp, message) => {
+          console.log("NewFunding", from, timestamp, message);
+
+          setAllFundings((prevState) => [
+            ...prevState,
+            {
+              address: from,
+              timestamp: new Date(timestamp * 1000),
+              message: message,
+            },
+          ]);
+        });
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -120,13 +133,15 @@ export default function App() {
           signer
         );
 
-        let count = await deCryptoFundContract.getTotalFunding();
+        let count = await deCryptoFundContract.getFundingCount();
         console.log("Retrieved total funds count...", count.toNumber());
 
-        const fundTnx = await deCryptoFundContract.fund(message);
+        const fundTnx = await deCryptoFundContract.fund(message, {
+          gasLimit: 300000,
+        });
         console.log("Mining... ", fundTnx.hash);
 
-        count = await deCryptoFundContract.getTotalFunding();
+        count = await deCryptoFundContract.getFundingCount();
         console.log("Retrieved total funds count...", count.toNumber());
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -158,7 +173,7 @@ export default function App() {
         signer
       );
 
-      let count = await deCryptoFundContract.getTotalFunding();
+      let count = await deCryptoFundContract.getFundingCount();
       if (count) setLoadingTotalFund(false);
       setTotalFunding(Number(count));
     } catch (err) {
