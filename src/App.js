@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "./utils/DeCryptoFund.json";
 import "./App.css";
+import FundingDetails from "./FundingDetails";
 
 export default function App() {
   const contractAddress = "0xC48AD3d45675Fbb8d343AE29A208bE3D7692C948";
@@ -194,33 +195,34 @@ export default function App() {
     <div className="mainContainer">
       <div className="dataContainer">
         {loadingTotalFund && <div>Loading...</div>}
-        <div className="header">👋 Total Funding: {totalFunding}</div>
 
-        <div className="bio">
-          I am farza and I worked on self-driving cars so that's pretty cool
-          right? Connect your Ethereum wallet and wave at me!
-        </div>
+        <FundingDetails fundingCount={totalFunding} />
 
         {!currentAccount && (
           <button className="waveButton" onClick={connectWallet}>
             Connect Wallet
           </button>
         )}
-
-        <form onSubmit={fund}>
-          <label>
-            Message:
-            <input
-              type="text"
-              id="message"
-              required
-              onChange={({ target }) => setMessage(target.value)}
-            />
-          </label>
-          <button type="submit" className="waveButton">
-            Fund Me
-          </button>
+        <div className="header">Total Fundings: {totalFunding}</div>
+        <form className="row" onSubmit={fund}>
+          <div className="col">
+            <label className="form-label">
+              Message:
+              <input
+                type="text"
+                id="message"
+                required
+                onChange={({ target }) => setMessage(target.value)}
+              />
+            </label>
+          </div>
+          <div className="col">
+            <button type="submit" className="waveButton">
+              Fund Mantle Education Foundation
+            </button>
+          </div>
         </form>
+
         {allFundings.map((wave, index) => {
           return (
             <div
