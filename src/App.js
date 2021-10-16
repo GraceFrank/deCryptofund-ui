@@ -10,12 +10,14 @@ import abi from "./utils/DeCryptoFund.json";
 import "./App.css";
 import FundingDetails from "./FundingDetails";
 import HomePage from "./Pages/Home/HomePage";
+import DonatePage from "./Pages/Donation/DonationPage";
 
 export default function App() {
   return (
     <Router>
       <Switch>
         <Route path="/" exact component={HomePage} />
+        <Route path="/donate" component={DonatePage} />
 
         {/* <Route path="/404" component={NotFoundPage} /> */}
         {/* <Redirect to="/404" /> */}
