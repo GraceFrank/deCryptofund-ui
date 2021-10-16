@@ -50,6 +50,8 @@ export default function App() {
         wavePortalContract.on("NewFunding", (from, timestamp, message) => {
           console.log("NewFunding", from, timestamp, message);
 
+          setTotalFunding((prevState) => prevState + 1);
+
           setAllFundings((prevState) => [
             ...prevState,
             {
