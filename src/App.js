@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ethers } from "ethers";
 import abi from "./utils/DeCryptoFund.json";
 import "./App.css";
 import FundingDetails from "./FundingDetails";
 import HomePage from "./Pages/Home/HomePage";
 import DonatePage from "./Pages/Donation/DonationPage";
+import AccountProvider from "./context/AccountContext";
 
 export default function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/donate" component={DonatePage} />
-
-        {/* <Route path="/404" component={NotFoundPage} /> */}
-        {/* <Redirect to="/404" /> */}
-      </Switch>
-    </Router>
+    <AccountProvider>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/donate" component={DonatePage} />
+        </Switch>
+      </Router>
+    </AccountProvider>
   );
 }
 // export default function App() {
