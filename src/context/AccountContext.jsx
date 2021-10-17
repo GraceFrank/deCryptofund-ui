@@ -1,23 +1,28 @@
 import React, { useEffect } from "react";
 import { createContext, useState } from "react";
-import { connectWallet } from "../utils/metamaskHelpers";
+import { getAccount, connectWallet } from "../utils/metamaskHelpers";
 
 export const AccountContext = createContext();
 
 export const AccountProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
 
-  async function getAccount() {
+  async function setAccount() {
+    const account = await getAccount();
+    if (account) setCurrentAccount(account);
+  }
+
+  async function connectUserWallet() {
     const account = await connectWallet();
     if (account) setCurrentAccount(account);
   }
 
   useEffect(() => {
-    getAccount();
+    setAccount();
   }, []);
 
   return (
-    <AccountContext.Provider value={[currentAccount, setCurrentAccount]}>
+    <AccountContext.Provider value={[currentAccount, connectUserWallet]}>
       {children}
     </AccountContext.Provider>
   );

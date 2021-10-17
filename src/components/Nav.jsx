@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AccountContext } from "../context/AccountContext";
 
 export default function Nav() {
+  const [account, connectWallet] = useContext(AccountContext);
+
   return (
     <header id="header" className="header fixed-top">
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -11,86 +14,23 @@ export default function Nav() {
 
         <nav id="navbar" className="navbar">
           <ul>
-            <li>
-              <a className="nav-link scrollto active" href="#hero">
-                Home
-              </a>
-            </li>
-            <li>
-              <a className="nav-link scrollto" href="#about">
-                About
-              </a>
-            </li>
-            <li>
-              <a className="nav-link scrollto" href="#services">
-                Services
-              </a>
-            </li>
-            <li>
-              <a className="nav-link scrollto" href="#portfolio">
-                Portfolio
-              </a>
-            </li>
-            <li>
-              <a className="nav-link scrollto" href="#team">
-                Team
-              </a>
-            </li>
-            <li>
-              <a href="blog.html">Blog</a>
-            </li>
-            <li className="dropdown">
-              <a href="#">
-                <span>Drop Down</span> <i className="bi bi-chevron-down"></i>
-              </a>
-              <ul>
-                <li>
-                  <a href="#">Drop Down 1</a>
-                </li>
-                <li className="dropdown">
-                  <a href="#">
-                    <span>Deep Drop Down</span>{" "}
-                    <i className="bi bi-chevron-right"></i>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Deep Drop Down 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Deep Drop Down 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Deep Drop Down 3</a>
-                    </li>
-                    <li>
-                      <a href="#">Deep Drop Down 4</a>
-                    </li>
-                    <li>
-                      <a href="#">Deep Drop Down 5</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Drop Down 2</a>
-                </li>
-                <li>
-                  <a href="#">Drop Down 3</a>
-                </li>
-                <li>
-                  <a href="#">Drop Down 4</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a className="nav-link scrollto" href="#contact">
-                Contact
-              </a>
-            </li>
-            <li>
-              <a className="getstarted scrollto" href="#about">
-                Get Started
-              </a>
-            </li>
+            {account && (
+              <li>
+                <i className="bi bi-person-bounding-box"></i>
+                <span title={account}>{account.substring(0, 20)}...</span>
+              </li>
+            )}
+            {!account && (
+              <li>
+                <button
+                  type="button"
+                  className="btn getstarted scrollto"
+                  onClick={connectWallet}
+                >
+                  Connect Wallet
+                </button>
+              </li>
+            )}
           </ul>
           <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>

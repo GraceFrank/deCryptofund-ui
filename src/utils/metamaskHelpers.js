@@ -14,7 +14,7 @@ export const isMetaMaskInstalled = async () => {
   }
 };
 
-export const connectWallet = async () => {
+export const getAccount = async () => {
   try {
     const { ethereum } = window;
 
@@ -27,6 +27,26 @@ export const connectWallet = async () => {
     } else {
       console.log("No authorized account found");
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const connectWallet = async () => {
+  try {
+    const { ethereum } = window;
+
+    if (!ethereum) {
+      alert("Get MetaMask!");
+      return;
+    }
+
+    const accounts = await ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+    console.log("Connected", accounts);
+    return accounts[0];
   } catch (error) {
     console.log(error);
   }

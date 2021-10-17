@@ -377,7 +377,12 @@ section {
 .navbar-mobile .dropdown > .dropdown-active {
   display: block;
 }
-
+.navbar li  {
+  color: #4154f1;
+}
+.navbar li i  {
+  margin-right: 10px;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
