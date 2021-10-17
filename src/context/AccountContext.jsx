@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { createContext, useState } from "react";
-import { getAccount, connectWallet } from "../utils/metamaskHelpers";
+import {
+  getAccount,
+  connectWallet,
+  isMetaMaskInstalled,
+} from "../utils/metamaskHelpers";
 
 export const AccountContext = createContext();
 
@@ -13,6 +17,10 @@ export const AccountProvider = ({ children }) => {
   }
 
   async function connectUserWallet() {
+    if (!isMetaMaskInstalled()) {
+      alert("Install Metamask to Connect Wallet");
+      return;
+    }
     const account = await connectWallet();
     if (account) setCurrentAccount(account);
   }
