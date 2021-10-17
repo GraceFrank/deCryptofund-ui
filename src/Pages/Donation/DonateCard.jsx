@@ -40,7 +40,7 @@ export default function DonateCard({
             <button
               type="button"
               onClick={account ? handleDonate : connectWallet}
-              class="btn btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+              className="btn btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
             >
               <span>{account ? "Donate" : "Connect"}</span>
               <i class="bi bi-arrow-right"></i>

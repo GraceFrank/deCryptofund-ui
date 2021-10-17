@@ -34,16 +34,9 @@ export default function FundRaisers({ projects = fakeProjects }) {
   ));
 
   return (
-    <section id="fundRaisers" class="fundRaisers">
-      <div class="container" data-aos="fade-up">
-        <header class="section-header">
-          <h2>Fundraisers</h2>
-          <p>Your Projects</p>
-        </header>
-
-        <div class="row gy-4">{projectsDisplay}</div>
-      </div>
-    </section>
+    <div class="container" data-aos="fade-up">
+      <div class="row gy-4">{projectsDisplay}</div>
+    </div>
   );
 }
 
@@ -60,8 +53,38 @@ function FundRaiser({ data }) {
         </div>
         <div class="member-info">
           <h4>{data.title}</h4>
-          <span>Chief Executive Officer</span>
+          <div className="price mb-2">
+            <h5>Eth {data.amountRaised}</h5>
+            <span> out of Eth {data.target} raised.</span>
+          </div>
+          <div class="progress">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              style={{ width: (data.amountRaised / data.target) * 100 }}
+              aria-valuenow="25"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
           <p>{data.description}</p>
+          <div className="d-flex justify-content-between">
+            <a
+              href={`/donate?id=${data.id}`}
+              class="btn btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+            >
+              <span>View</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a
+              href={`https://twitter.com/intent/tweet?&text=${data.title}&url=${process.env.REACT_APP_APP_BASE_URL}donate/?id=${data.id}`}
+              target="_blank"
+              className="btn-buy"
+            >
+              <i class="bi bi-twitter" style={{ color: "#1DA1F2" }}></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
