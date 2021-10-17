@@ -15,10 +15,17 @@ export default function Nav() {
         <nav id="navbar" className="navbar">
           <ul>
             {account && (
-              <li>
-                <i className="bi bi-person-bounding-box"></i>
-                <span title={account}>{account.substring(0, 20)}...</span>
-              </li>
+              <>
+                <li>
+                  <a class="nav-link scrollto" href="/dashboard">
+                    My Projects
+                  </a>
+                </li>
+                <li>
+                  <i className="bi bi-person-bounding-box"></i>
+                  <span title={account}>{account.substring(0, 20)}...</span>
+                </li>
+              </>
             )}
             {!account && (
               <li>

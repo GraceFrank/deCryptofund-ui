@@ -1,125 +1,69 @@
 import React from "react";
+const fakeProjects = [
+  {
+    title: "Help Willam fight Cancer",
+    description:
+      "William Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.",
+    target: 0.1,
+    amountRaised: 0.002,
+    createdAt: Date.now(),
+    lastFundedAt: Date.now(),
+    id: 1,
+    donors: 2,
+    imageSrc:
+      "https://images.unsplash.com/photo-1518949142393-f1d68174c92a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG9vcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+  },
+  {
+    title: "Help Fight Poverty",
+    description:
+      "William Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.",
+    target: 0.1,
+    amountRaised: 0.002,
+    createdAt: Date.now(),
+    lastFundedAt: Date.now(),
+    id: 1,
+    donors: 2,
+    imageSrc:
+      "https://images.unsplash.com/photo-1629293360328-fc31e9e735a6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHBvb3J8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+  },
+];
 
-export default function FundRaisers() {
+export default function FundRaisers({ projects = fakeProjects }) {
+  const projectsDisplay = projects.map((project) => (
+    <FundRaiser data={project} />
+  ));
+
   return (
-    <section id="services" class="services">
+    <section id="fundRaisers" class="fundRaisers">
       <div class="container" data-aos="fade-up">
         <header class="section-header">
-          <h2>Services</h2>
-          <p>Veritatis et dolores facere numquam et praesentium</p>
+          <h2>Fundraisers</h2>
+          <p>Your Projects</p>
         </header>
 
-        <div class="row gy-4">
-          <div
-            class="col-lg-4 col-md-6"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="service-box blue">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Nesciunt Mete</h3>
-              <p>
-                Provident nihil minus qui consequatur non omnis maiores. Eos
-                accusantium minus dolores iure perferendis tempore et
-                consequatur.
-              </p>
-              <a href="#" class="read-more">
-                <span>Read More</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div
-            class="col-lg-4 col-md-6"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <div class="service-box orange">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Eosle Commodi</h3>
-              <p>
-                Ut autem aut autem non a. Sint sint sit facilis nam iusto sint.
-                Libero corrupti neque eum hic non ut nesciunt dolorem.
-              </p>
-              <a href="#" class="read-more">
-                <span>Read More</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div
-            class="col-lg-4 col-md-6"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <div class="service-box green">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Ledo Markt</h3>
-              <p>
-                Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus
-                ea aut. Vel qui id voluptas adipisci eos earum corrupti.
-              </p>
-              <a href="#" class="read-more">
-                <span>Read More</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div
-            class="col-lg-4 col-md-6"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <div class="service-box red">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Asperiores Commodi</h3>
-              <p>
-                Non et temporibus minus omnis sed dolor esse consequatur.
-                Cupiditate sed error ea fuga sit provident adipisci neque.
-              </p>
-              <a href="#" class="read-more">
-                <span>Read More</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div
-            class="col-lg-4 col-md-6"
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            <div class="service-box purple">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Velit Doloremque.</h3>
-              <p>
-                Cumque et suscipit saepe. Est maiores autem enim facilis ut aut
-                ipsam corporis aut. Sed animi at autem alias eius labore.
-              </p>
-              <a href="#" class="read-more">
-                <span>Read More</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div
-            class="col-lg-4 col-md-6"
-            data-aos="fade-up"
-            data-aos-delay="700"
-          >
-            <div class="service-box pink">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Dolori Architecto</h3>
-              <p>
-                Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque
-                non et debitis iure. Corrupti recusandae ducimus enim.
-              </p>
-              <a href="#" class="read-more">
-                <span>Read More</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+        <div class="row gy-4">{projectsDisplay}</div>
       </div>
     </section>
+  );
+}
+
+function FundRaiser({ data }) {
+  return (
+    <div
+      class="col-lg-3 col-md-6 d-flex align-items-stretch"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div class="member">
+        <div class="member-img">
+          <img src={data.imageSrc} class="img-fluid" alt="" />
+        </div>
+        <div class="member-info">
+          <h4>{data.title}</h4>
+          <span>Chief Executive Officer</span>
+          <p>{data.description}</p>
+        </div>
+      </div>
+    </div>
   );
 }
