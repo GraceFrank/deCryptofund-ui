@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AccountContext } from "../../context/AccountContext";
 import heroSvg from "../../assets/img/hero.svg";
 
 export default function Hero() {
+  const [account, connectWallet] = useContext(AccountContext);
+
   return (
     <section id="hero" className="hero d-flex align-items-center">
       <div className="container">
@@ -13,23 +16,28 @@ export default function Hero() {
             </h2>
             <div data-aos="fade-up" data-aos-delay="600">
               <div className="text-center text-lg-start">
-                <a
-                  href="#about"
-                  className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
-                >
-                  <span>Start Fund Raiser</span>
+                {account && (
+                  <button
+                    type="button"
+                    className="btn btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+                  >
+                    <span>Start a Fund Raiser</span>
 
-                  <i className="bi bi-arrow-right"></i>
-                </a>
+                    <i className="bi bi-arrow-right"></i>
+                  </button>
+                )}
 
-                <a
-                  href="#about"
-                  className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
-                >
-                  <span>Connect Wallet</span>
+                {!account && (
+                  <button
+                    onClick={connectWallet}
+                    type="button"
+                    className="btn btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+                  >
+                    <span>Connect Wallet</span>
 
-                  <i className="bi bi-arrow-right"></i>
-                </a>
+                    <i className="bi bi-arrow-right"></i>
+                  </button>
+                )}
               </div>
             </div>
           </div>
